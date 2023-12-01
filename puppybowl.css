@@ -1,0 +1,115 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  #app {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  #roster-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .player {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    cursor: grabbing;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .player:hover {
+    background-color: #d4d4d4;
+  }
+  
+  #details-container {
+    margin-top: 20px;
+  }
+  
+  #add-player-container {
+    margin-top: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* New styles for improved layout and additional design elements */
+  
+  #details-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  #details-container img {
+    border-radius: 50%;
+    max-width: 150px;
+  }
+  
+  #details-container button {
+    margin-top: 10px;
+  }
+  
+  #add-player-form button {
+    background-color: #2196f3;
+  }
+  
+  #add-player-form button:hover {
+    background-color: #0b7dda;
+  }
+  
+  #puppy-rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
