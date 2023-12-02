@@ -1,0 +1,87 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+  height: 300px;
+  width: 300px;
+  padding: 15px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(116, 86, 86, 0.267);
+  transition: 0.3s;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 30px;         /*sets the gap between the pic and puppy info*/
+  background-color: rgb(248, 229, 210);
+}
+
+#all-Player-Container{
+  display: flex;
+  flex-direction: column;
+}
+#div2Heading{       /*"puppy bowl player" heading*/
+  text-align: center;
+  font-size: 40px;
+  padding-bottom: 20px;
+}
+
+#div1Heading{
+  text-align: center;
+}
+
+#puppyListDiv{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  row-gap: 10px;
+}
+
+h4{                 /*puppy name*/
+  font-size: 25px;
+}
+
+p{                  /*puppy info*/
+  font-size: 23px;
+}
+
+button{             /*show more, show less and remove button*/
+  font-size: large;
+}
+
+
+ul{
+  padding: 10px;
+}
+
+body{
+  max-width: 1550px;
+  max-height: 1000px;
+}
+
+
+#new-Player-Container{
+  display: flex;
+  height: 200px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 200px;
+}
+
+.mainPuppyInfo{
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: stretch;
+  row-gap: 5px;
+}
