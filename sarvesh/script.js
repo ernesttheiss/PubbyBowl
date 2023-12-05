@@ -10,6 +10,7 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
 let state={
     allPlayers:[],
     singlePlayer:null,          //This is where the info of the player selected will be stored
+    newPup:{},
 };
 
 /**
@@ -56,22 +57,31 @@ const fetchSinglePlayer = async (playerId) => {
 };
 
 
-const addNewPlayer = async (playerObj) => {
+// async function addPlayer(){
+    
+//     state.newPup.name=document.getElementById("puppyName").value;
+//     state.newPup.breed=document.getElementById("puppyBreed").value;
+//     await addNewPlayer(state.newPup);
+// }
+
+
+const addNewPlayer = async (e) => {
+    e.preventDefault();
     try {
-        // const response = await fetch('https://fsa-puppy-bowl.herokuapp.com/api/2310-FSA-ET-WEB-PT-SF/players',{
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         name: 'Demo puppy',
-        //         breed: 'Demo breed',
-        //     }),
-        //     }
-        // );
-        // const result = await response.json();
-        // console.log(result);
-        // init();
+        const response = await fetch('https://fsa-puppy-bowl.herokuapp.com/api/2310-FSA-ET-WEB-PT-SF/players',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: document.getElementById("puppyName").value,
+                breed: document.getElementById("puppyBreed").value,
+            }),
+            }
+        );
+        const result = await response.json();
+        console.log(result);
+        init();
     } catch (err) {
         console.error('Oops, something went wrong with adding that player!', err);
     }
@@ -147,9 +157,19 @@ const renderAllPlayers = (playerList) => {
  * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,
  * fetches all players from the database, and renders them to the DOM.
  */
-const renderNewPlayerForm = () => {
+const renderNewPlayerForm =  () => {
     try {
-        
+        let firstDiv=document.querySelector("#div1Heading");
+        firstDiv.innerHTML=`
+        <form id=addPup>
+            <label >Puppy Name</label><br>
+            <input type="text" id="puppyName"><br>
+            <label> Puppy Breed</label><br>
+            <input type="text" id="puppyBreed"><br>
+            <button id="addBtn">Add Player</button>
+        </form>`;
+        let addPup=document.querySelector("#addPup");
+        addPup.addEventListener("submit",  addNewPlayer);
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
@@ -177,9 +197,7 @@ const init = async () => {
     clearDom();                                         //clearDom clears the DOM by removing all previous tags
     const players = await fetchAllPlayers();
     renderAllPlayers(players);
-
     renderNewPlayerForm();
 };
 
 init();
-addNewPlayer({});

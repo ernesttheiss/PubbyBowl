@@ -1,7 +1,7 @@
 const cohortName = '2310-fsa-et-web-pt-sf';
 
-;// Define the base API endpoint
-const apiEndpoint = 'https://fsa-puppy-bowl.herokuapp.com/api/${2310-fsa-et-web-pt-sf}/';
+// Define the base API endpoint
+const apiEndpoint = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
 
 // DOM elements
 const app = document.getElementById('app');
@@ -14,7 +14,7 @@ const puppyRainContainer = document.getElementById('puppy-rain-container');
 const fetchRoster = async () => {
   try {
     // Fetch roster data from the API
-    const response = await fetch(`${apiEndpoint}/roster`);
+    const response = await fetch(`${apiEndpoint}players`);
     const roster = await response.json();
 
     // Render the roster
