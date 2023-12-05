@@ -74,7 +74,7 @@ const addNewPlayer = async (e) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: document.getElementById("puppyName").value,
+                name: document.getElementById("puppyName").value,       //get new puppy name and breen from 
                 breed: document.getElementById("puppyBreed").value,
             }),
             }
@@ -161,15 +161,19 @@ const renderNewPlayerForm =  () => {
     try {
         let firstDiv=document.querySelector("#div1Heading");
         firstDiv.innerHTML=`
+        <h1 id="mainHeading">Puppy Bowl 2023</h1>
+        <div id=formDiv>
+        <h2 id=div1Heading>Puppy Bowl New Player Form</h2>
         <form id=addPup>
             <label >Puppy Name</label><br>
             <input type="text" id="puppyName"><br>
             <label> Puppy Breed</label><br>
             <input type="text" id="puppyBreed"><br>
             <button id="addBtn">Add Player</button>
-        </form>`;
+        </form>
+        </div>`;                                    //set up a form for adding a new player 
         let addPup=document.querySelector("#addPup");
-        addPup.addEventListener("submit",  addNewPlayer);
+        addPup.addEventListener("submit",  addNewPlayer);       //create an event lister for the "Add Player" button
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
