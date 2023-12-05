@@ -35,6 +35,7 @@ img {
 
 #div1Heading{
   text-align: center;
+  padding-bottom: 20px;
 }
 
 #puppyListDiv{
@@ -71,10 +72,8 @@ body{
 
 #new-Player-Container{
   display: flex;
-  height: 200px;
   flex-wrap: wrap;
-  justify-content: space-around;
-  height: 200px;
+  justify-content: space-around; 
 }
 
 .mainPuppyInfo{
@@ -84,4 +83,12 @@ body{
   flex-wrap: wrap;
   align-items: stretch;
   row-gap: 5px;
+}
+
+#mainHeading{
+  padding-bottom: 30px;
+}
+
+form{
+  font-size: 23px;
 }
