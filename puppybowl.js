@@ -1,30 +1,31 @@
-let playerContainer = document.getElementById('all-players-container');
-let newPlayerFormContainer = document.getElementById('new-player-form');
-let puppyListDiv = null;
+const cohortName = '2310-fsa-et-web-pt-sf';
 
-// Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
-const cohortName = '2310-FSA-ET-WEB-PT-SF';
-// Use the APIURL variable for fetch requests
-const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
+;// Define the base API endpoint
+const apiEndpoint = 'https://fsa-puppy-bowl.herokuapp.com/api/${2310-fsa-et-web-pt-sf}/';
 
-let state = {
-    allPlayers: [],
-    singlePlayer: null,
-};
+// DOM elements
+const app = document.getElementById('app');
+const rosterContainer = document.getElementById('roster-container');
+const detailsContainer = document.getElementById('details-container');
+const addPlayerForm = document.getElementById('add-player-form');
+const puppyRainContainer = document.getElementById('puppy-rain-container');
 
-/**
- * It fetches all players from the API and returns them
- * @returns An array of objects.
- */
-const fetchAllPlayers = async () => {
-    try {
-        let response = await fetch(APIURL + "players");
-        let playersData = await response.json();
-        state.allPlayers = playersData.data.players;
-        return playersData.data.players;
-    } catch (err) {
-        console.error('Uh oh, trouble fetching players!', err);
-    }
+// Function to fetch and render the roster
+const fetchRoster = async () => {
+  try {
+    // Fetch roster data from the API
+    const response = await fetch(`${apiEndpoint}/roster`);
+    const roster = await response.json();
+
+    // Render the roster
+    rosterContainer.innerHTML = `
+      <h2>Roster</h2>
+      <div class="player-list">
+        ${roster.map(renderPlayer).join('')}
+      </div>`;
+  } catch (error) {
+    console.error('Error fetching roster:', error);
+  }
 };
 
 async function showHide(idx) {
