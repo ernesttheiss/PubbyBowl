@@ -1,99 +1,179 @@
-const cohortName = '2310-fsa-et-web-pt-sf';
+let playerContainer = document.getElementById('all-players-container');
+let newPlayerFormContainer = document.getElementById('new-player-form');
+let puppyListDiv = null;
 
-;// Define the base API endpoint
-const apiEndpoint = 'https://fsa-puppy-bowl.herokuapp.com/api/${2310-fsa-et-web-pt-sf}/';
+// Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
+const cohortName = '2310-FSA-ET-WEB-PT-SF';
+// Use the APIURL variable for fetch requests
+const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
 
-// DOM elements
-const app = document.getElementById('app');
-const rosterContainer = document.getElementById('roster-container');
-const detailsContainer = document.getElementById('details-container');
-const addPlayerForm = document.getElementById('add-player-form');
-const puppyRainContainer = document.getElementById('puppy-rain-container');
-
-// Function to fetch and render the roster
-const fetchRoster = async () => {
-  try {
-    // Fetch roster data from the API
-    const response = await fetch(`${apiEndpoint}/roster`);
-    const roster = await response.json();
-
-    // Render the roster
-    rosterContainer.innerHTML = `
-      <h2>Roster</h2>
-      <div class="player-list">
-        ${roster.map(renderPlayer).join('')}
-      </div>`;
-  } catch (error) {
-    console.error('Error fetching roster:', error);
-  }
+let state = {
+    allPlayers: [],
+    singlePlayer: null,
 };
 
-// Function to render an individual player
-const renderPlayer = (player) => `
-  <div class="player" onclick="showPlayerDetails(${player.id})">
-    <img src="${player.image}" alt="${player.name}" class="player-image">
-    <p>${player.name} - ${player.breed}</p>
-  </div>`;
-
-// Function to fetch and render player details
-const showPlayerDetails = async (playerId) => {
-  try {
-    // Fetch player details from the API
-    const response = await fetch(`${apiEndpoint}/player/${playerId}`);
-    const player = await response.json();
-
-    // Render player details
-    detailsContainer.innerHTML = `
-      <h2>${player.name}</h2>
-      <img src="${player.image}" alt="${player.name}" class="player-image-details">
-      <p>Breed: ${player.breed}</p>
-      <p>Age: ${player.age}</p>
-      <button onclick="removePlayer(${player.id})">Remove Player</button>`;
-  } catch (error) {
-    console.error('Error fetching player details:', error);
-  }
+/**
+ * It fetches all players from the API and returns them
+ * @returns An array of objects.
+ */
+const fetchAllPlayers = async () => {
+    try {
+        let response = await fetch(APIURL + "players");
+        let playersData = await response.json();
+        state.allPlayers = playersData.data.players;
+        return playersData.data.players;
+    } catch (err) {
+        console.error('Uh oh, trouble fetching players!', err);
+    }
 };
 
-// Function to remove a player from the roster
+async function showHide(idx) {
+    document.querySelector(`#span${idx} button`).style.display = "none"; // Fix: Hide the button, not the span
+    await fetchSinglePlayer(idx);
+};
+
+function removeExInfo(id) {
+    document.querySelector(`#extraInfo${id}`).style.display = "none";
+    document.querySelector(`#span${id}`).style.display = "block";
+}
+
+const fetchSinglePlayer = async (playerId) => {
+    try {
+        const response = await fetch(APIURL + "players/" + playerId);
+        const result = await response.json();
+        state.singlePlayer = result.data.player;
+        let exInfoDiv = document.querySelector(`#extraInfo${playerId}`);
+        exInfoDiv.style.display = "block";
+        exInfoDiv.innerHTML = `
+            <p>Status: ${state.singlePlayer.status}</p>     
+            <p>Team ID: ${state.singlePlayer.teamId}</p>
+            <button onclick="removeExInfo(${state.singlePlayer.id})">Show Less</button>
+            <button onclick="removePlayer(${state.singlePlayer.id})">Remove</button>
+        `;
+    } catch (err) {
+        console.error(`Oh no, trouble fetching player #${playerId}!`, err);
+    }
+};
+
+const addNewPlayer = async (playerObj) => {
+    try {
+        const response = await fetch(APIURL + "players/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(playerObj),
+        });
+        const result = await response.json();
+        console.log(result);
+        init();
+    } catch (err) {
+        console.error('Oops, something went wrong with adding that player!', err);
+    }
+};
+
 const removePlayer = async (playerId) => {
-  try {
-    // Send a DELETE request to remove the player
-    await fetch(`${apiEndpoint}/removePlayer/${playerId}`, { method: 'DELETE' });
-
-    // Refresh the roster after removing a player
-    fetchRoster();
-    // Clear player details after removal
-    detailsContainer.innerHTML = '';
-  } catch (error) {
-    console.error('Error removing player:', error);
-  }
+    try {
+        const response = await fetch(APIURL + "players/" + playerId, {
+            method: "DELETE",
+        });
+        const result = await response.json();
+        console.log(result);
+        init();
+    } catch (err) {
+        console.error(
+            `Whoops, trouble removing player #${playerId} from the roster!`,
+            err
+        );
+    }
 };
 
-// Event listener for adding a player
-addPlayerForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+const renderAllPlayers = (playerList) => {
+    try {
+        let renderedPlayers = playerList.map((p) => {
+            let indPlayer = document.createElement("ul");
+            indPlayer.innerHTML = `
+            <div class="card">
+                <img src=${p.imageUrl} alt="${p.breed} puppy">
+                <div class="container${p.id} mainPuppyInfo">
+                    <h4>Name: ${p.name}</h4>
+                    <p>Breed: ${p.breed}</p>
+                    <div id="extraInfo${p.id}" style="display:none">
+                    </div>
+                <div>
+                <span id="span${p.id}">
+                <button onclick="showHide(${p.id})"> Show more!</button>
+                <button onclick="removePlayer(${p.id})">Remove</button>
+                </span>
+            </div>
+            `;
+            return indPlayer;
+        });
+        puppyListDiv.append(...renderedPlayers);
+    } catch (err) {
+        console.error('Uh oh, trouble rendering players!', err);
+    }
+};
 
-  // Get input values
-  const name = document.getElementById('name').value;
-  const breed = document.getElementById('breed').value;
+const renderNewPlayerForm = () => {
+    const formHTML = `
+        <h2>Puppy Bowl New Player Form</h2>
+        <form id="addPlayerForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-  try {
-    // Send a POST request to add a new player
-    const response = await fetch(`${apiEndpoint}/addPlayer`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, breed }),
+            <label for="breed">Breed:</label>
+            <input type="text" id="breed" name="breed" required>
+
+            <label for="imageUrl">Image URL:</label>
+            <input type="url" id="imageUrl" name="imageUrl" required>
+
+            <button type="submit">Add Player</button>
+        </form>
+    `;
+    newPlayerFormContainer.innerHTML = formHTML;
+
+    const addPlayerForm = document.getElementById('addPlayerForm');
+    addPlayerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(addPlayerForm);
+        const playerObj = {
+            name: formData.get('name'),
+            breed: formData.get('breed'),
+            imageUrl: formData.get('imageUrl'),
+        };
+        addNewPlayer(playerObj);
     });
+};
 
-    // Refresh the roster after adding a player
-    fetchRoster();
-  } catch (error) {
-    console.error('Error adding player:', error);
-  }
-});
+function clearDom() {
+    document.body.removeChild(playerContainer);
+    document.body.removeChild(newPlayerFormContainer);
+    const newApp = document.createElement("div");
+    const newApp2 = document.createElement("div");
+    newApp.innerHTML = `<h2 id=div1Heading>Puppy Bowl New Player Form</h2>`;
+    newApp2.innerHTML = `<h2 id=div2Heading>Puppy Bowl Players:</h2>      
+                        <div id=puppyListDiv></div>
+    `;
+    newApp.id = "new-Player-Container";
+    newApp2.id = "all-Player-Container";
+    playerContainer = newApp2;
+    newPlayerFormContainer = newApp;
+    document.body.append(newPlayerFormContainer);
+    document.body.append(playerContainer);
+    puppyListDiv = document.querySelector("#puppyListDiv");
+};
 
-// Initial fetch and render
-fetchRoster();
+const init = async () => {
+    clearDom();
+    const players = await fetchAllPlayers();
+    renderAllPlayers(players);
+    renderNewPlayerForm();
+};
+
+init();
+
+
 
 
 

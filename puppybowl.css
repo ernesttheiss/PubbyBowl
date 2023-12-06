@@ -16,12 +16,15 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-top: 20px;
+  max-width: 600px; /* Limit the width for better readability */
+  margin: auto; /* Center the content */
 }
 
 h1 {
   color: #333;
 }
 
+/* Roster styling */
 #roster-container {
   margin-top: 20px;
   display: flex;
@@ -49,6 +52,7 @@ h1 {
   margin-bottom: 8px;
 }
 
+/* Player details styling */
 #details-container {
   margin-top: 20px;
   display: flex;
@@ -80,6 +84,7 @@ h1 {
   background-color: #c0392b;
 }
 
+/* Add player form styling */
 #add-player-container {
   margin-top: 20px;
 }
