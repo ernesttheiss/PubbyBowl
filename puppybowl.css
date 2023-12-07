@@ -1,124 +1,104 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f7f7f7;
+/* Resetting some default styles for better consistency */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li,
+form,
+button {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  padding: 0;
 }
 
-#app {
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global container styling */
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Header styling */
+#mainHeading {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form styling */
+#new-player-form {
   background-color: #fff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  margin-top: 20px;
-  max-width: 600px; /* Limit the width for better readability */
-  margin: auto; /* Center the content */
-}
-
-h1 {
-  color: #333;
-}
-
-/* Roster styling */
-#roster-container {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.player {
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  overflow: hidden;
-}
-
-.player:hover {
-  background-color: #d4d4d4;
-}
-
-.player img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-/* Player details styling */
-#details-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#details-container img {
-  border-radius: 50%;
-  max-width: 150px;
-  margin-bottom: 10px;
-}
-
-#details-container p {
-  margin-bottom: 10px;
-}
-
-#details-container button {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-#details-container button:hover {
-  background-color: #c0392b;
-}
-
-/* Add player form styling */
-#add-player-container {
-  margin-top: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 label {
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 input {
-  margin-bottom: 10px;
   padding: 10px;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
 }
 
 button {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #3498db;
+  background-color: #4caf50;
   color: #fff;
+  padding: 10px 15px;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #45a049;
 }
+
+/* All players container styling */
+#all-players-container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual player card styling */
+.card {
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.mainPuppyInfo h4 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.mainPuppyInfo p {
+  color: #666;
+}
+
+/* Additional styling as needed */
