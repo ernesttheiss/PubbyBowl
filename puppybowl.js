@@ -134,10 +134,10 @@ const renderNewPlayerForm = () => {
             <div id=formDiv>
                 <h2 id=div1Heading>Puppy Bowl New Player Form</h2>
                 <form id=addPup>
-                    <label>Puppy Name</label><br>
-                    <input type="text" id="puppyName"><br>
-                    <label>Puppy Breed</label><br>
-                    <input type="text" id="puppyBreed"><br>
+                    <label>Puppy Name</label>
+                    <input type="text" id="puppyName">
+                    <label>Puppy Breed</label>
+                    <input type="text" id="puppyBreed">
                     <button id="addBtn">Add Player</button>
                 </form>
             </div>
@@ -157,7 +157,7 @@ function clearDom() {
     const newApp2 = document.createElement("div");
     newApp.innerHTML = `<h2 id=div1Heading>Puppy Bowl New Player Form</h2>`;
     newApp2.innerHTML = `
-        <h2 id=div2Heading>Puppy Bowl Players:</h2>      
+        <h2 id=div2Heading>Puppy Bowl Players</h2>      
         <div id=puppyListDiv></div>
     `;
     newApp.id = "new-Player-Container";
