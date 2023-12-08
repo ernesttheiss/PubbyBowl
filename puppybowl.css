@@ -10,15 +10,35 @@ form,
 button {
   margin: 0;
   padding: 0;
+ 
 }
 
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
-  margin: 0;
+  margin: auto;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 1500px;
+  height: 1300px;
 }
 
+#new-Player-Container{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+align-content: center;
+padding-bottom: 30px;
+}
+
+#formDiv{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  
+}
 /* Global container styling */
 .container {
   width: 80%;
@@ -29,6 +49,14 @@ body {
 #mainHeading {
   color: #333;
   margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 60px;
+}
+
+#div1Heading,#div2Heading{
+  font-size: 30px;
+  padding-bottom: 20px;
 }
 
 /* Form styling */
@@ -42,17 +70,25 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  
 }
 
 label {
-  margin-bottom: 8px;
   color: #333;
+  padding-bottom: 5px;
 }
 
 input {
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ddd;
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+#addBtn{
+  font-size: large;
+  margin-top: 10px;
+
 }
 
 button {
@@ -69,11 +105,10 @@ button:hover {
 }
 
 /* All players container styling */
-#all-players-container {
-  background-color: #fff;
-  padding: 20px;
-  margin: 20px 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#all-Player-Container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Individual player card styling */
@@ -83,22 +118,52 @@ button:hover {
   padding: 15px;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
 }
 
 .card img {
-  width: 100%;
-  height: auto;
+  width: 300px;
+  height: 400px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
 }
 
-.mainPuppyInfo h4 {
+.mainPuppyInfo, h4 {
   color: #333;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-items: center;
 }
 
 .mainPuppyInfo p {
   color: #666;
 }
 
+#puppyListDiv{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-evenly
+}
 /* Additional styling as needed */
+/* ul{
+  width: 352px;
+  height: 600px;
+} */
+
+/* div[id*="extraInfo"]{
+  padding-left: 70px;
+} */
+
+div[id*="extraInfo"] p{
+  padding-left: 36px;
+}
